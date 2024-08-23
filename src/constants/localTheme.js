@@ -9,7 +9,7 @@ export const LOCAL_COLOR = {
 };
 
 export const LOCAL_WIDTH = {
-  container: 1150,
+  container: 1330,
 };
 
 export const LOCAL_HEIGHT = {

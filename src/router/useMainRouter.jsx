@@ -5,6 +5,8 @@ import FitContainer from '../components/Layout/Container/FitContainer';
 import Home from '../pages/Home/Home';
 import Infra from '../pages/Infra/Infra';
 import Matching from '../pages/Matching/Matching';
+import Matching2 from '../pages/Matching/Matching2';
+import Matching3 from '../pages/Matching/Matching3';
 
 const useMainRouter = () => {
   return useRoutes([
@@ -21,6 +23,8 @@ const useMainRouter = () => {
             },
             { path: 'infra', element: <Infra /> },
             { path: 'matching', element: <Matching /> },
+            { path: 'matching-step2', element: <Matching2 /> },
+            { path: 'matching-step3', element: <Matching3 /> },
           ],
         },
       ],

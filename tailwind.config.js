@@ -1,6 +1,6 @@
 import { LOCAL_HEIGHT, LOCAL_WIDTH, LOCAL_COLOR } from './src/constants/localTheme';
 
-module.exports = {
+export default {
   content: ['./src/**/*.{js,jsx}'],
   theme: {
     extend: {

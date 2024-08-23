@@ -3,8 +3,8 @@ import { Outlet } from 'react-router-dom';
 
 const FitContainer = () => {
   return (
-    <div className="flex min-h-screen w-full justify-center pt-10 sm:pt-16">
-      <div className="mb-20 mt-header w-full max-w-container px-2 2xl:px-0">
+    <div className="flex justify-center w-full min-h-screen pt-10 sm:pt-20">
+      <div className="w-full px-0 mb-20 mt-header max-w-container 2xl:px-0">
         <Outlet />
       </div>
     </div>

@@ -7,3 +7,14 @@ export const LOCAL_COLOR = {
   green: '#87D29C',
   black: '#000',
 };
+
+export const LOCAL_WIDTH = {
+  container: 1150,
+};
+
+export const LOCAL_HEIGHT = {
+  header: {
+    xs: 56,
+    sm: 69,
+  },
+};

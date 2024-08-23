@@ -18,7 +18,7 @@ const StyledTab = styled(Tab)(() => ({
 
 const Header = () => {
   const location = useLocation();
-  const routes = ['/', '/infra', '/matching'];
+  const routes = ['/', '/infra', '/matching', '/review'];
   const curTab = routes.indexOf(location.pathname);
 
   return (
@@ -48,6 +48,7 @@ const Header = () => {
           <StyledTab label="Home" component={Link} to="/" />
           <StyledTab label="지역 인프라" component={Link} to="/infra" />
           <StyledTab label="공고 매칭" component={Link} to="/matching" />
+          <StyledTab label="지역 후기" component={Link} to="/review" />
         </Tabs>
         <SearchSection />
         <Stack direction="row" className="items-center" spacing={1.5}>

@@ -1,7 +1,9 @@
 import './App.css';
+import useMainRouter from './router/useMainRouter';
 
-function App() {
-  return <div className="App"></div>;
-}
+const App = () => {
+  const routes = useMainRouter();
+  return <div>{routes}</div>;
+};
 
 export default App;

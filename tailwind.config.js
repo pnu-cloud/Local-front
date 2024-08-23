@@ -1,5 +1,4 @@
-/** @type {import('tailwindcss').Config} */
-import { LOCAL_COLOR } from './src/constants/localTheme';
+import { LOCAL_HEIGHT, LOCAL_WIDTH, LOCAL_COLOR } from './src/constants/localTheme';
 
 module.exports = {
   content: ['./src/**/*.{js,jsx}'],
@@ -36,6 +35,12 @@ module.exports = {
             fontWeight: '700',
           },
         ],
+      },
+      spacing: {
+        header: LOCAL_HEIGHT.header.sm,
+      },
+      maxWidth: {
+        container: LOCAL_WIDTH.container,
       },
     },
   },

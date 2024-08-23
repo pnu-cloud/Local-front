@@ -38,6 +38,8 @@ export default {
       },
       spacing: {
         header: LOCAL_HEIGHT.header.sm,
+        15: '3.75rem',
+        20: '5rem',
       },
       maxWidth: {
         container: LOCAL_WIDTH.container,

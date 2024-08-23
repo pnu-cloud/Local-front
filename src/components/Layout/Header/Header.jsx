@@ -1,24 +1,14 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import {
-  AppBar,
-  IconButton,
-  Toolbar,
-  Tabs,
-  Tab,
-  Stack,
-  TextField,
-  InputAdornment,
-  Button,
-  Typography,
-} from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
-import { LOCAL_HEIGHT, LOCAL_COLOR } from '../../../constants/localTheme';
-import { ReactComponent as Logo } from '../../../assets/logo.svg';
+import { AppBar, Toolbar, Tabs, Tab, Stack, Button, Typography } from '@mui/material';
 import { styled } from '@mui/system';
+import { LOCAL_HEIGHT, LOCAL_COLOR } from '../../../constants/localTheme';
+import SearchSection from '../../../components/Section/SearchSection';
+import { ReactComponent as Logo } from '../../../assets/logo.svg';
 
 const StyledTab = styled(Tab)(() => ({
-  color: 'black', // 기본 텍스트 색상
+  width: '8rem',
+  color: 'black',
   '&.Mui-selected': {
     fontWeight: 700,
     color: 'black',
@@ -40,42 +30,26 @@ const Header = () => {
         <Tabs
           value={curTab}
           aria-label="nav tabs"
-          className="text-black"
+          className="items-center mr-20 text-black"
           sx={{
             '& .MuiTabs-indicator': {
               backgroundColor: LOCAL_COLOR.green,
+              height: '4px',
+              bottom: '0px',
+            },
+            '& .MuiTab-root': {
+              minHeight: 'unset',
+              height: LOCAL_HEIGHT.header,
+              display: 'flex',
+              alignItems: 'center',
             },
           }}
         >
-          <StyledTab
-            label="Home"
-            component={Link}
-            to="/"
-            sx={{
-              '&.Mui-selected': {
-                borderColor: LOCAL_COLOR.green,
-              },
-            }}
-          />
+          <StyledTab label="Home" component={Link} to="/" />
           <StyledTab label="지역 인프라" component={Link} to="/infra" />
           <StyledTab label="공고 매칭" component={Link} to="/matching" />
         </Tabs>
-        <TextField
-          className="border-gray"
-          sx={{ width: '600px' }}
-          placeholder="Find"
-          size="small"
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton>
-                  <SearchIcon />
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
-
+        <SearchSection />
         <Stack direction="row" className="items-center" spacing={1.5}>
           <Typography className="text-darkGray">User1님</Typography>
           <Button

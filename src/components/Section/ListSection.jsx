@@ -99,7 +99,7 @@ const ListSection = ({ postInfo, regionSearch }) => {
             <ListItem
               button
               onClick={() => {
-                const engName = regionNameK2E[post.region];
+                const engName = regionNameK2E[post.local];
                 handleListItemClick(engName);
               }}
               sx={{
@@ -116,11 +116,11 @@ const ListSection = ({ postInfo, regionSearch }) => {
               />
               <ListItemText
                 sx={{ width: '20%' }}
-                primary={<Typography sx={{ fontWeight: 700, fontSize: '14px' }}>{post.region}</Typography>}
+                primary={<Typography sx={{ fontWeight: 700, fontSize: '14px' }}>{post.local}</Typography>}
               />
               <ListItemText
                 sx={{ width: '60%' }}
-                primary={<Typography sx={{ fontWeight: 700, fontSize: '14px' }}>{post.place}</Typography>}
+                primary={<Typography sx={{ fontWeight: 700, fontSize: '14px' }}>{post.name}</Typography>}
               />
             </ListItem>
             <Divider />
@@ -164,10 +164,10 @@ const ListSection = ({ postInfo, regionSearch }) => {
 ListSection.propTypes = {
   postInfo: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
       category: PropTypes.string.isRequired,
-      region: PropTypes.string.isRequired,
-      place: PropTypes.string.isRequired,
+      local: PropTypes.string.isRequired,
     }),
   ),
 };

@@ -4,7 +4,12 @@ import * as d3 from 'd3';
 import { feature } from 'topojson-client';
 import GangwonMapTopo from './GangwonMapTopo.json'; // 준비한 TopoJSON 파일 경로
 
-const GangwonMap = () => {
+const GangwonMap = ({ regionSearch, setRegionSearch }) => {
+  const handleRegionChange = (newRegion) => {
+    console.log('Region changed to:', newRegion);
+    setRegionSearch(newRegion);
+  };
+
   const svgRef = useRef(null);
 
   useEffect(() => {
@@ -39,6 +44,7 @@ const GangwonMap = () => {
       'Goseong-gun': '#CCFAF7', // 고성군
       'Yangyang-gun': '#E2FDFB', // 양양군
     };
+
     const features = feature(GangwonMapTopo, GangwonMapTopo.objects['GangwonMapTopo']).features;
 
     // 지도 그리기
@@ -50,27 +56,32 @@ const GangwonMap = () => {
       .append('path')
       .attr('d', pathGenerator)
       .attr('fill', (d) => {
-        // 방어적 코딩: properties 객체가 존재하는지 확인
         const engName = d.properties?.SIG_ENG_NM;
-        console.log(d.properties.SIG_ENG_NM);
-        console.log(engName);
-        return colorMapping[engName] || '#DFDFDF';
+        if (regionSearch === 'ALL') {
+          return colorMapping[engName] || '#DFDFDF';
+        }
+        return regionSearch === d.properties?.SIG_KOR_NM ? colorMapping[engName] : '#DFDFDF';
       })
       .attr('stroke', '#fff') // 경계선을 하얀색으로 설정
       .attr('stroke-width', 0.5)
-      .on('mouseover', function () {
-        d3.select(this).attr('fill', '#DFDFDF');
-      })
-      .on('mouseout', function () {
-        // 'this'는 현재 이벤트가 발생한 DOM 요소를 가리킴
-        const data = d3.select(this).datum();
+      .on('click', function (event, d) {
+        const korName = d.properties?.SIG_KOR_NM;
+        if (korName) {
+          console.log('previous' + regionSearch);
+          const newRegion = regionSearch === korName ? 'ALL' : korName;
+          handleRegionChange(newRegion); // Directly pass the intended state
 
-        // data.properties를 통해 속성에 접근
-        const engName = data.properties?.SIG_ENG_NM;
-
-        // engName과 함께 색상 매핑
-        d3.select(this).attr('fill', colorMapping[engName] || '#DFDFDF');
+          // Update the map colors after region change
+          svg.selectAll('path').attr('fill', (d) => {
+            const engName = d.properties?.SIG_ENG_NM;
+            if (regionSearch === korName) {
+              return '#DFDFDF'; // If deselecting, turn all to gray
+            }
+            return korName === d.properties?.SIG_KOR_NM ? colorMapping[engName] : '#DFDFDF';
+          });
+        }
       });
+
     // 도시 이름을 위한 사각형 배경과 텍스트 추가
     features.forEach((d) => {
       const [x, y] = pathGenerator.centroid(d); // 중심 좌표 계산
@@ -86,6 +97,7 @@ const GangwonMap = () => {
         .attr('fill', 'rgba(255, 255, 255, 0.4)') // 반투명 흰색 배경
         .style('backdrop-filter', 'blur(15px)') // 블러 효과 (브라우저 지원 필요)
         .style('pointer-events', 'none'); // 마우스 이벤트 무시
+
       // 텍스트 추가
       svg
         .append('text')
@@ -99,7 +111,7 @@ const GangwonMap = () => {
         .style('pointer-events', 'none') // 마우스 이벤트 무시
         .text(d.properties?.SIG_KOR_NM?.slice(0, 2)); // 도시 이름의 앞 두 글자만 텍스트로 표시
     });
-  }, []);
+  }, [regionSearch]); // Add regionSearch as a dependency to rerender on state change
 
   return (
     <Box className="w-30%">

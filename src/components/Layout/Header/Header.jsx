@@ -20,6 +20,7 @@ const Header = () => {
   const location = useLocation();
   const routes = ['/', '/infra', '/matching', '/review'];
   const curTab = routes.indexOf(location.pathname);
+  const validTabIndex = curTab !== -1 ? curTab : 0;
 
   return (
     <AppBar position="fixed" className="h-14 sm:h-header !bg-white px-10" sx={{ height: LOCAL_HEIGHT.header }}>
@@ -28,7 +29,7 @@ const Header = () => {
           <Logo />
         </Link>
         <Tabs
-          value={curTab}
+          value={validTabIndex}
           aria-label="nav tabs"
           className="items-center mr-20 text-black"
           sx={{

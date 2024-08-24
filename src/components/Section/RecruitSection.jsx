@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Card,
   CardContent,
@@ -12,7 +12,9 @@ import {
   ListItem,
   ListItemText,
 } from '@mui/material';
+import PropTypes from 'prop-types';
 import { LOCAL_COLOR } from '../../constants/localTheme';
+import ApplyModal from '../Modal/ApplyModal';
 
 const CustomListItem = ({ primaryText, secondaryText }) => {
   return (
@@ -28,7 +30,12 @@ const CustomListItem = ({ primaryText, secondaryText }) => {
     </ListItem>
   );
 };
+
 const RecruitSection = () => {
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const author = '작성자 이름'; // Replace with actual data
   const uploadDate = '2024-08-24'; // Replace with actual data
 
@@ -109,6 +116,7 @@ const RecruitSection = () => {
       </CardContent>
       <CardContent sx={{ marginTop: 0 }}>
         <Button
+          onClick={handleClickOpen}
           variant="contained"
           fullWidth
           sx={{
@@ -128,9 +136,15 @@ const RecruitSection = () => {
         >
           지원하기
         </Button>
+        <ApplyModal open={open} handleClose={handleClose} />
       </CardContent>
     </Card>
   );
+};
+
+CustomListItem.propTypes = {
+  primaryText: PropTypes.string.isRequired,
+  secondaryText: PropTypes.string,
 };
 
 export default RecruitSection;

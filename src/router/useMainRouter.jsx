@@ -7,7 +7,9 @@ import Infra from '../pages/Infra/Infra';
 import Matching from '../pages/Matching/Matching';
 import Matching2 from '../pages/Matching/Matching2';
 import Matching3 from '../pages/Matching/Matching3';
+import Apply from '../pages/Apply/Apply';
 import Review from '../pages/Review/Review';
+import ApplyModal from '../components/Modal/ApplyModal';
 
 import ListSection from '../components/Section/ListSection';
 
@@ -30,6 +32,8 @@ const useMainRouter = () => {
             { path: 'matching-step3', element: <Matching3 /> },
             { path: 'review', element: <Review /> },
             { path: 'list', element: <ListSection /> },
+            { path: 'apply', element: <Apply /> },
+            { path: 'modal', element: <ApplyModal /> },
           ],
         },
       ],

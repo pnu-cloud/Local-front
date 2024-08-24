@@ -27,6 +27,8 @@ const regionNameK2E = {
   양양: 'Yangyang-gun',
 };
 const ListSection = ({ postInfo, regionSearch }) => {
+  console.log('first' + regionSearch);
+  console.log(postInfo);
   const [page, setPage] = useState(1);
   const itemsPerPage = 10;
   const handlePageChange = (event, newPage) => {
@@ -34,9 +36,12 @@ const ListSection = ({ postInfo, regionSearch }) => {
   };
 
   // Filter posts based on regionSearch
+
   const filteredPosts = postInfo.filter((post) => {
     if (regionSearch === 'ALL') return true; // Show all posts if regionSearch is 'ALL'
-    return post.region.slice(0, 2) === regionSearch.slice(0, 2); // Filter posts with the same first two characters
+    console.log('regionSearch : ' + regionSearch);
+    console.log('post : ' + post.local);
+    return post.local.substring(0, 2) === regionSearch.substring(0, 2); // Filter posts with the same first two characters
   });
 
   const paginatedPosts = filteredPosts.slice((page - 1) * itemsPerPage, page * itemsPerPage);
@@ -100,7 +105,7 @@ const ListSection = ({ postInfo, regionSearch }) => {
               button
               onClick={() => {
                 const engName = regionNameK2E[post.local];
-                handleListItemClick(engName);
+                handleListItemClick(post.local);
               }}
               sx={{
                 '&:hover': {

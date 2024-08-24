@@ -31,6 +31,7 @@ const Matching3 = () => {
   const decodedRegionSearch = decodeURIComponent(regionSearch); // Decode the URL-encoded parameter
   const regionName = regionNameE2K[decodedRegionSearch];
   console.log(regionName);
+  const [regionSearch1, setRegionSearch] = useState(regionSearch);
   return (
     <>
       <BannerSection
@@ -38,11 +39,11 @@ const Matching3 = () => {
         question='Q3. 거의 다 왔어요! 숙소 근처의 기업 및 봉사활동 리스트를 선택하고 “지원하기" 버튼을 눌러주세요'
       />
       <Box className="flex pt-15" sx={{ justifyContent: 'space-between' }}>
-        <GangwonMap sx={{ pointerEvents: 'none' }} regionSearch={regionName} />
+        <Box sx={{ pointerEvents: 'none' }}>
+          <GangwonMap regionSearch={regionSearch1} setRegionSearch={setRegionSearch} />
+        </Box>
         <ActivitySection />
       </Box>
-
-      {/* <RecruitSection /> */}
     </>
   );
 };

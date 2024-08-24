@@ -1,23 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Stack, Typography, Button, Box, Tabs, Tab } from '@mui/material';
+import { Stack, Typography, Button, Box, Tabs } from '@mui/material';
 import SearchSection from '../../components/Section/SearchSection';
 import { LOCAL_COLOR } from '../../constants/localTheme';
-import { styled } from '@mui/system';
 import redMark from '../../assets/redMark.svg';
-
-const StyledTab = styled(Tab)(() => ({
-  fontSize: '18px',
-  width: '150px',
-  height: '58px',
-  color: 'black',
-  '&.Mui-selected': {
-    color: 'black',
-    border: 'none',
-    backgroundColor: LOCAL_COLOR.backWhite,
-  },
-  fontWeight: 500,
-}));
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -75,9 +61,6 @@ const Infra = () => {
             },
           }}
         >
-          <StyledTab label="시설정보" />
-          <StyledTab label="교통정보" />
-          <StyledTab label="모의집값" />
           <div
             className="flex items-center"
             style={{

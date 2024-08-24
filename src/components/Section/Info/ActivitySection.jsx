@@ -24,8 +24,6 @@ const ActivitySection = () => {
     setActivityType(e.target.value);
     setActivityType(e.target.value);
   };
-  const [selectedRows, setSelectedRows] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
 
   const jobPostings = [
     {
@@ -37,6 +35,13 @@ const ActivitySection = () => {
     },
     {
       id: 2,
+      category: '아르바이트',
+      region: '춘천 OO구',
+      task: '춘천 닭갈비 서빙알바',
+      distance: '버스 평균 20분 소요',
+    },
+    {
+      id: 3,
       category: '아르바이트',
       region: '춘천 OO구',
       task: '춘천 닭갈비 서빙알바',
@@ -183,14 +188,8 @@ const ActivitySection = () => {
               </TableHead>
               <TableBody>
                 {jobPostings.map((post) => (
-                  <TableRow
-                    key={post.id}
-                    sx={{ '&:hover': { backgroundColor: '#F9E08880', cursor: 'pointer' } }}
-                    onClick={() => setSelectedRows([post.id])}
-                  >
-                    <TableCell sx={{ color: selectedRows.includes(post.id) ? 'red' : 'inherit' }}>
-                      {post.category}
-                    </TableCell>
+                  <TableRow key={post.id} sx={{ '&:hover': { backgroundColor: '#F9E08880', cursor: 'pointer' } }}>
+                    <TableCell>{post.category}</TableCell>
                     <TableCell>{post.region}</TableCell>
                     <TableCell>{post.task}</TableCell>
                     <TableCell>{post.distance}</TableCell>

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
+import { Box } from '@mui/material';
 import { feature } from 'topojson-client';
 import { useNavigate } from 'react-router-dom'; // React Router의 useNavigate 훅을 가져옵니다.
 import KoreaMapTopo from './KoreaMapTopo.json'; // 준비한 TopoJSON 파일 경로
@@ -72,6 +73,7 @@ const KoreaMap = () => {
       })
       .attr('stroke', '#fff') // 경계선을 하얀색으로 설정
       .attr('stroke-width', 0.5)
+      .style('cursor', 'pointer')
       .on('mouseover', function () {
         d3.select(this).attr('fill', '#DFDFDF');
       })
@@ -82,7 +84,7 @@ const KoreaMap = () => {
       })
       .on('click', function (event, d) {
         const engName = d.properties?.CTP_ENG_NM;
-        navigate(`/matching2/${engName}`); // 클릭 시 해당 경로로 이동
+        navigate(`/matching-step2/${engName}`); // 클릭 시 해당 경로로 이동
       });
 
     svg
@@ -103,7 +105,11 @@ const KoreaMap = () => {
       }); // 도시 이름을 텍스트로 표시
   }, [navigate]); // useEffect의 종속성 배열에 navigate를 추가
 
-  return <svg ref={svgRef} width="800" height="600"></svg>;
+  return (
+    <Box className="w-50%">
+      <svg ref={svgRef} width="800" height="600"></svg>
+    </Box>
+  );
 };
 
 export default KoreaMap;

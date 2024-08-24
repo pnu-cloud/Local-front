@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { Box } from '@mui/material';
 import * as d3 from 'd3';
 import { feature } from 'topojson-client';
 import GangwonMapTopo from './GangwonMapTopo.json'; // 준비한 TopoJSON 파일 경로
@@ -42,6 +43,7 @@ const GangwonMap = () => {
 
     // 지도 그리기
     svg
+      .style('cursor', 'pointer')
       .selectAll('path')
       .data(features)
       .enter()
@@ -99,7 +101,11 @@ const GangwonMap = () => {
     });
   }, []);
 
-  return <svg ref={svgRef} width="800" height="600"></svg>;
+  return (
+    <Box className="w-30%">
+      <svg ref={svgRef} width="800" height="600"></svg>
+    </Box>
+  );
 };
 
 export default GangwonMap;

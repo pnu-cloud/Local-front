@@ -26,7 +26,7 @@ const useMainRouter = () => {
             },
             { path: 'infra', element: <Infra /> },
             { path: 'matching', element: <Matching /> },
-            { path: 'matching-step2', element: <Matching2 /> },
+            { path: 'matching-step2/*', element: <Matching2 /> },
             { path: 'matching-step3', element: <Matching3 /> },
             { path: 'review', element: <Review /> },
             { path: 'list', element: <ListSection /> },

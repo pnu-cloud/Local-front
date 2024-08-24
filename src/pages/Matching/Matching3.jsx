@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 import BannerSection from '../../components/Section/BannerSection';
 import GangwonMap from '../../components/Maps/GangwonMap';
 import ActivitySection from '../../components/Section/Info/ActivitySection';
-
+import RecruitSection from '../../components/Section/RecruitSection';
 import { useParams } from 'react-router-dom';
 const regionNameE2K = {
   'Chuncheon-si': '춘천시',
@@ -31,7 +31,9 @@ const Matching3 = () => {
   const decodedRegionSearch = decodeURIComponent(regionSearch); // Decode the URL-encoded parameter
   const regionName = regionNameE2K[decodedRegionSearch];
   console.log(regionName);
+
   const [regionSearch1, setRegionSearch] = useState(regionSearch);
+
   return (
     <>
       <BannerSection
@@ -42,6 +44,7 @@ const Matching3 = () => {
         <Box sx={{ pointerEvents: 'none' }}>
           <GangwonMap regionSearch={regionSearch1} setRegionSearch={setRegionSearch} />
         </Box>
+
         <ActivitySection />
       </Box>
     </>

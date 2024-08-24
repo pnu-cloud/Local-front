@@ -1,13 +1,17 @@
-import React from 'react';
-import { Stack, Typography, Button, TextField, InputAdornment, Box } from '@mui/material';
+import React, { useState } from 'react';
+import { Stack, Typography, Button, TextField, InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { LOCAL_COLOR } from '../../constants/localTheme';
 import redMark from '../../assets/redMark.svg';
+import DetailPage from './DetailPage';
 
 const Infra = () => {
+  const [localSearch, setLocalSearch] = useState('');
+  const [searchValue, setSearchValue] = useState(' -- ');
+
   return (
-    <>
-      <Stack direction="row" className="items-center justify-between">
+    <div className="mx-24">
+      <Stack direction="row" className="items-center justify-between ">
         <Typography className="mr-5 whitespace-nowrap text-14px_medium" sx={{ fontWeight: 700 }}>
           정보를 알고싶은 지역을 선택해주세요
         </Typography>
@@ -27,20 +31,22 @@ const Infra = () => {
               </InputAdornment>
             ),
           }}
+          value={localSearch}
+          onChange={(e) => setLocalSearch(e.target.value)}
         />
         <Button
           className="ml-5 font-bold text-18px_medium"
           sx={{ backgroundColor: LOCAL_COLOR.yellow, color: 'black', fontWeight: 700, boxShadow: 'none' }}
           variant="contained"
+          onClick={() => setSearchValue(localSearch)}
         >
           검색
         </Button>
       </Stack>
       <div
-        className="flex items-center pt-15"
+        className="flex items-center pt-15 mb-4"
         style={{
           right: 0,
-          height: '100%',
           justifyContent: 'flex-end',
         }}
       >
@@ -52,11 +58,11 @@ const Infra = () => {
           선택한 지역:
         </Typography>
         <Typography className="text-14px_medium" sx={{ color: LOCAL_COLOR.darkGray, marginX: '10px' }}>
-          --
+          {searchValue}
         </Typography>
       </div>
-      <Box className="bg-backWhite" sx={{ height: '774px' }}></Box>
-    </>
+      <DetailPage region={searchValue} />
+    </div>
   );
 };
 

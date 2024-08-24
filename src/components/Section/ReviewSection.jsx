@@ -29,7 +29,7 @@ const ReviewBox = ({ props }) => {
   );
 };
 
-const ReviewSection = ({ reviews }) => {
+const ReviewSection = ({ reviews, localSearch }) => {
   const [reviewText, setReviewText] = useState('');
 
   const handleInputChange = (event) => {
@@ -39,14 +39,15 @@ const ReviewSection = ({ reviews }) => {
   const handleSubmit = async () => {
     try {
       const newReview = {
-        reviewText,
+        description: reviewText,
+        local: localSearch,
       };
 
       // API에 POST 요청
-      await axios.post('https://pnu.app/infra/review/1', newReview);
+      await axios.post('https://life.pnu.app/infra/review/1', newReview);
 
-      // 새로운 리뷰를 추가하여 리뷰 목록을 업데이트
       setReviewText(''); // 제출 후 텍스트 필드 초기화
+      window.location.reload();
     } catch (error) {
       console.error('Error submitting review:', error);
     }

@@ -60,7 +60,11 @@ const GangwonMap = ({ regionSearch, setRegionSearch }) => {
         if (regionSearch === 'ALL') {
           return colorMapping[engName] || '#DFDFDF';
         }
-        return regionSearch === d.properties?.SIG_KOR_NM ? colorMapping[engName] : '#DFDFDF';
+        console.log(regionSearch);
+        console.log(d.properties.SIG_KOR_NM);
+        return regionSearch.substring(0, 2) === d.properties?.SIG_KOR_NM.substring(0, 2)
+          ? colorMapping[engName]
+          : '#DFDFDF';
       })
       .attr('stroke', '#fff') // 경계선을 하얀색으로 설정
       .attr('stroke-width', 0.5)

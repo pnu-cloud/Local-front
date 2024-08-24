@@ -10,7 +10,7 @@ import Matching3 from '../pages/Matching/Matching3';
 import Apply from '../pages/Apply/Apply';
 import Review from '../pages/Review/Review';
 import ApplyModal from '../components/Modal/ApplyModal';
-
+import MatchingFinish from '../pages/Matching/MatchingFinish';
 import ListSection from '../components/Section/ListSection';
 
 const useMainRouter = () => {
@@ -37,6 +37,7 @@ const useMainRouter = () => {
             { path: 'list', element: <ListSection /> },
             { path: 'apply', element: <Apply /> },
             { path: 'modal', element: <ApplyModal /> },
+            { path: 'matchingfinish', element: <MatchingFinish /> },
           ],
         },
       ],

@@ -1,13 +1,11 @@
 import React from 'react';
-import KoreaMap from '../../components/Maps/KoreaMap';
-import GangwonMap from '../../components/Maps/GangwonMap';
+import { Stack } from '@mui/material';
+import landing from '../../assets/landing.svg';
 const Home = () => {
   return (
-    <div className="text-red">
-      This is Home Page.
-      <GangwonMap></GangwonMap>
-      <KoreaMap></KoreaMap>
-    </div>
+    <Stack display="flex" justifyContent="center" alignItems="center" sx={{ width: '100%' }}>
+      <img src={landing} style={{ width: '60%' }}></img>
+    </Stack>
   );
 };
 export default Home;

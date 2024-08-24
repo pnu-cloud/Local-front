@@ -84,7 +84,7 @@ const KoreaMap = () => {
       })
       .on('click', function (event, d) {
         const engName = d.properties?.CTP_ENG_NM;
-        navigate(`/matching-step2/${engName}`); // 클릭 시 해당 경로로 이동
+        navigate(`/matching-step2/${Naming[engName]}`); // 클릭 시 해당 경로로 이동
       });
 
     svg

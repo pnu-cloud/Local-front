@@ -37,7 +37,8 @@ const Review = () => {
         if (localSearch === 'ALL') {
           data = await AllReviewAPI(); // 전체 리뷰를 가져오는 API 호출
         } else {
-          data = await LocalReviewAPI(localSearch); // 특정 지역의 리뷰를 가져오는 API 호출
+          const toKorean = Naming[localSearch];
+          data = await LocalReviewAPI(toKorean); // 특정 지역의 리뷰를 가져오는 API 호출
         }
         setReviews(data); // 가져온 리뷰 데이터를 상태에 저장
       } catch (error) {
@@ -54,8 +55,8 @@ const Review = () => {
   }
   if (!loading && reviews) {
     return (
-      <Stack direction="row">
-        <Box className="flex pt-13" sx={{ justifyContent: 'space-between' }}>
+      <Stack direction="row" alignItems="flex-start">
+        <Box className="flex pt-13" sx={{ justifyContent: 'space-between', top: 0 }}>
           <Stack
             direction="column" // 수직 방향으로 정렬
             justifyContent="flex-end"
@@ -77,7 +78,7 @@ const Review = () => {
           {/* // */}
         </Box>
         <Box className="flex pt-13" sx={{ justifyContent: 'space-between' }}>
-          <ReviewSection reviews={reviews}> </ReviewSection>
+          <ReviewSection reviews={reviews} localSearch={Naming[localSearch]}></ReviewSection>
         </Box>
       </Stack>
     );

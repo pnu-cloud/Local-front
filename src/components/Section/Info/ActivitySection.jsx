@@ -18,9 +18,8 @@ import {
   Paper,
   Stack,
 } from '@mui/material';
-
-import axios from 'axios';
 import JobsAPI from '../../../APIs/JobsAPI';
+import RecruitSection from '../RecruitSection';
 
 const ActivitySection = () => {
   const [activityType, setActivityType] = useState('');
@@ -28,39 +27,16 @@ const ActivitySection = () => {
     setActivityType(e.target.value);
     setActivityType(e.target.value);
   };
+  const [selectJob, setSelectedJob] = useState(null);
+  const handleButtonClick = (jobId) => {
+    // 지원하기 버튼이 눌렸을 때, 부모 컴포넌트에 jobId를 전달
+    console.log('ID' + jobId);
+    setSelectedJob(jobId);
+  };
 
-  const jobPostings = [
-    // {
-    //   id: 1,
-    //   category: '아르바이트',
-    //   region: '춘천 OO구',
-    //   task: '춘천 닭갈비 서빙알바',
-    //   distance: '버스 평균 20분 소요',
-    // },
-    // {
-    //   id: 2,
-    //   category: '아르바이트',
-    //   region: '춘천 OO구',
-    //   task: '춘천 닭갈비 서빙알바',
-    //   distance: '버스 평균 20분 소요',
-    // },
-    // {
-    //   id: 3,
-    //   category: '아르바이트',
-    //   region: '춘천 OO구',
-    //   task: '춘천 닭갈비 서빙알바',
-    //   distance: '버스 평균 20분 소요',
-    // },
-    // {
-    //   id: 3,
-    //   category: '아르바이트',
-    //   region: '춘천 OO구',
-    //   task: '춘천 닭갈비 서빙알바',
-    //   distance: '버스 평균 20분 소요',
-    // },
-  ];
   const ActivityVolunteer = () => {
     const navigate = useNavigate();
+
     return (
       <Box sx={{ mt: 4 }}>
         <Typography sx={{ fontWeight: 700, fontSize: 18 }}>2. 봉사 활동</Typography>
@@ -126,6 +102,7 @@ const ActivitySection = () => {
 
   const WorkActivity = ({ jsonData }) => {
     console.log(jsonData);
+
     return (
       <Box sx={{ mt: 4 }}>
         <Typography sx={{ fontWeight: 700, fontSize: 18 }}>2. 경제 활동</Typography>
@@ -187,6 +164,7 @@ const ActivitySection = () => {
             <Table>
               <TableHead>
                 <TableRow sx>
+                  <TableCell>ID</TableCell>
                   <TableCell>카테고리</TableCell>
                   <TableCell>상세 지역</TableCell>
                   <TableCell>업무</TableCell>
@@ -199,9 +177,11 @@ const ActivitySection = () => {
                 {Array.isArray(jsonData) &&
                   jsonData.map((post) => (
                     <TableRow
-                      key={post.timeByCar}
+                      key={post.jobId}
                       sx={{ '&:hover': { backgroundColor: '#F9E08880', cursor: 'pointer' } }}
+                      onClick={() => handleButtonClick(post.jobId)}
                     >
+                      <TableCell>{post.jobId}</TableCell>
                       <TableCell>{post.category}</TableCell>
                       <TableCell>{post.local}</TableCell>
                       <TableCell>{post.description}</TableCell>
@@ -240,45 +220,54 @@ const ActivitySection = () => {
     return <div>loading</div>; // 로딩 중일 때 표시할 컴포넌트
   }
   if (!loading && jsonData) {
-    return (
-      <Box sx={{ width: '70%', display: 'flex', flexDirection: 'column', gap: 1 }}>
-        <Typography sx={{ fontWeight: 700, fontSize: 18 }}>
-          1. 봉사활동과 아르바이트 중 어느 활동을 선호하시나요?
-        </Typography>
-        <RadioGroup row value={activityType} onChange={handleActivityTypeChange} sx={{ fontSize: 14, fontWeight: 500 }}>
-          <FormControlLabel
-            value="volunteer"
-            control={<Radio sx={{ '&.Mui-checked': { color: '#F9E088' } }} />}
-            label="봉사 활동"
-          />
-          <FormControlLabel
-            value="work"
-            control={<Radio sx={{ '&.Mui-checked': { color: '#F9E088' } }} />}
-            label="경제 활동"
-          />
-        </RadioGroup>
-        {activityType === 'volunteer' && (
-          <div>
-            <Box>
-              <ActivityVolunteer />
-            </Box>
-            <Box sx={{ opacity: 0.3 }}>
-              <WorkActivity jsonData={jsonData} />
-            </Box>
-          </div>
-        )}
-        {activityType === 'work' && (
-          <div>
-            <Box sx={{ opacity: 0.3 }}>
-              <ActivityVolunteer />
-            </Box>
-            <Box>
-              <WorkActivity jsonData={jsonData} />
-            </Box>
-          </div>
-        )}
-      </Box>
-    );
+    if (selectJob) {
+      return <RecruitSection jobId={3} />; // selectJob이 true일 때 렌더링되는 JSX
+    } else {
+      return (
+        <Box sx={{ width: '70%', display: 'flex', flexDirection: 'column', gap: 1 }}>
+          <Typography sx={{ fontWeight: 700, fontSize: 18 }}>
+            1. 봉사활동과 아르바이트 중 어느 활동을 선호하시나요?
+          </Typography>
+          <RadioGroup
+            row
+            value={activityType}
+            onChange={handleActivityTypeChange}
+            sx={{ fontSize: 14, fontWeight: 500 }}
+          >
+            <FormControlLabel
+              value="volunteer"
+              control={<Radio sx={{ '&.Mui-checked': { color: '#F9E088' } }} />}
+              label="봉사 활동"
+            />
+            <FormControlLabel
+              value="work"
+              control={<Radio sx={{ '&.Mui-checked': { color: '#F9E088' } }} />}
+              label="경제 활동"
+            />
+          </RadioGroup>
+          {activityType === 'volunteer' && (
+            <div>
+              <Box>
+                <ActivityVolunteer />
+              </Box>
+              <Box sx={{ opacity: 0.3 }}>
+                <WorkActivity jsonData={jsonData} />
+              </Box>
+            </div>
+          )}
+          {activityType === 'work' && (
+            <div>
+              <Box sx={{ opacity: 0.3 }}>
+                <ActivityVolunteer />
+              </Box>
+              <Box>
+                <WorkActivity jsonData={jsonData} />
+              </Box>
+            </div>
+          )}
+        </Box>
+      );
+    }
   }
 };
 

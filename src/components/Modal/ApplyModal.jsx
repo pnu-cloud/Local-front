@@ -17,6 +17,7 @@ import {
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { LOCAL_COLOR } from '../../constants/localTheme';
+import { useNavigate } from 'react-router-dom';
 
 const style = {
   position: 'absolute',
@@ -32,6 +33,7 @@ const style = {
 };
 
 const ApplyModal = ({ open, handleClose }) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     gender: '',
@@ -277,7 +279,7 @@ const ApplyModal = ({ open, handleClose }) => {
           </Button>
           <Button
             variant="contained"
-            onClick={handleSubmit}
+            onClick={() => navigate('/matchingfinish')}
             sx={{
               backgroundColor: LOCAL_COLOR.yellow,
               color: 'white',

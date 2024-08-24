@@ -1,0 +1,92 @@
+export const posts = [
+  {
+    id: 1,
+    category: '강원',
+    region: '춘천',
+    place: '한국방송통신대학교 강원지역대학 기숙사 A동',
+  },
+  {
+    id: 2,
+    category: '강원',
+    region: '춘천',
+    place: '한국방송통신대학교 강원지역대학 기숙사 A동',
+  },
+  {
+    id: 3,
+    category: '강원',
+    region: '춘천',
+    place: '한국방송통신대학교 강원지역대학 기숙사 A동',
+  },
+  {
+    id: 4,
+    category: '강원',
+    region: '춘천',
+    place: '한국방송통신대학교 강원지역대학 기숙사 A동',
+  },
+  {
+    id: 5,
+    category: '강원',
+    region: '춘천',
+    place: '한국방송통신대학교 강원지역대학 기숙사 A동',
+  },
+  {
+    id: 6,
+    category: '강원',
+    region: '춘천',
+    place: '한국방송통신대학교 강원지역대학 기숙사 A동',
+  },
+  {
+    id: 7,
+    category: '강원',
+    region: '춘천',
+    place: '한국방송통신대학교 강원지역대학 기숙사 A동',
+  },
+  {
+    id: 8,
+    category: '강원',
+    region: '춘천',
+    place: '한국방송통신대학교 강원지역대학 기숙사 A동',
+  },
+  {
+    id: 9,
+    category: '강원',
+    region: '춘천',
+    place: '한국방송통신대학교 강원지역대학 기숙사 A동',
+  },
+  {
+    id: 10,
+    category: '강원',
+    region: '춘천',
+    place: '한국방송통신대학교 강원지역대학 기숙사 A동',
+  },
+  {
+    id: 11,
+    category: '강원',
+    region: '춘천',
+    place: '한국방송통신대학교 강원지역대학 기숙사 A동',
+  },
+  {
+    id: 12,
+    category: '강원',
+    region: '춘천',
+    place: '한국방송통신대학교 강원지역대학 기숙사 A동',
+  },
+  {
+    id: 13,
+    category: '강원',
+    region: '춘천',
+    place: '한국방송통신대학교 강원지역대학 기숙사 A동',
+  },
+  {
+    id: 14,
+    category: '강원',
+    region: '춘천',
+    place: '한국방송통신대학교 강원지역대학 기숙사 A동',
+  },
+  {
+    id: 15,
+    category: '강원',
+    region: '춘천',
+    place: '한국방송통신대학교 강원지역대학 기숙사 A동',
+  },
+];

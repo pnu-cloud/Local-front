@@ -24,7 +24,7 @@ const Header = () => {
   return (
     <AppBar position="fixed" className="h-14 sm:h-header !bg-white px-10" sx={{ height: LOCAL_HEIGHT.header }}>
       <Toolbar className="flex items-center justify-between h-full">
-        <Link to="/header">
+        <Link to="/">
           <Logo />
         </Link>
         <Tabs

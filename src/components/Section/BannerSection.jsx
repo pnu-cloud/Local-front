@@ -10,7 +10,7 @@ const StyledGrid = styled(Grid)(() => ({
   alignItems: 'center',
 }));
 
-const BannerSection = ({ question }) => {
+const BannerSection = ({ question, step }) => {
   const navigate = useNavigate();
   const handleGoBack = () => {
     navigate(-1);
@@ -32,12 +32,12 @@ const BannerSection = ({ question }) => {
           </Typography>
         </StyledGrid>
         <StyledGrid item xs={5} justifyContent="flex-end">
-          <Typography sx={{ fontSize: '24px', fontWeight: '700', color: LOCAL_COLOR.green }}>1/3</Typography>
+          <Typography sx={{ fontSize: '24px', fontWeight: '700', color: LOCAL_COLOR.green }}>{step}/3</Typography>
         </StyledGrid>
-        <StyledGrid item xs={7}>
+        <StyledGrid item xs={8}>
           <Typography sx={{ fontSize: '18px' }}>{question}</Typography>
         </StyledGrid>
-        <StyledGrid item xs={5} justifyContent="flex-end">
+        <StyledGrid item xs={4} justifyContent="flex-end">
           <Button
             variant="contained"
             onClick={handleGoBack}
@@ -62,6 +62,7 @@ const BannerSection = ({ question }) => {
 };
 
 BannerSection.propTypes = {
+  step: PropTypes.string.isRequired,
   question: PropTypes.string.isRequired,
 };
 

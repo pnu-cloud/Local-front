@@ -4,16 +4,47 @@ import { List, ListItem, ListItemText, Divider, Typography, Pagination, Stack, B
 import { LOCAL_COLOR } from '../../constants/localTheme';
 import categoryIcon from '../../assets/category.svg';
 import SearchSection from './SearchSection';
+import { useNavigate } from 'react-router-dom';
 
-const ListSection = ({ postInfo }) => {
+const regionNameK2E = {
+  춘천: 'Chuncheon-si',
+  원주: 'Wonju-si',
+  강릉: 'Gangneung-si',
+  동해: 'Donghae-si',
+  태백: 'Taebaek-si',
+  속초: 'Sokcho-si',
+  삼척: 'Samcheok-si',
+  홍천: 'Hongcheon-gun',
+  횡성: 'Hoengseong-gun',
+  영월: 'Yeongwol-gun',
+  평창: 'Pyeongchang-gun',
+  정선: 'Jeongseon-gun',
+  철원: 'Cheorwon-gun',
+  화천: 'Hwacheon-gun',
+  양구: 'Yanggu-gun',
+  인제: 'Inje-gun',
+  고성: 'Goseong-gun',
+  양양: 'Yangyang-gun',
+};
+const ListSection = ({ postInfo, regionSearch }) => {
   const [page, setPage] = useState(1);
   const itemsPerPage = 10;
   const handlePageChange = (event, newPage) => {
     setPage(newPage);
   };
-  const paginatedPosts = postInfo.slice((page - 1) * itemsPerPage, page * itemsPerPage);
-  const pageCount = Math.ceil(postInfo.length / itemsPerPage);
 
+  // Filter posts based on regionSearch
+  const filteredPosts = postInfo.filter((post) => {
+    if (regionSearch === 'ALL') return true; // Show all posts if regionSearch is 'ALL'
+    return post.region.slice(0, 2) === regionSearch.slice(0, 2); // Filter posts with the same first two characters
+  });
+
+  const paginatedPosts = filteredPosts.slice((page - 1) * itemsPerPage, page * itemsPerPage);
+  const pageCount = Math.ceil(filteredPosts.length / itemsPerPage);
+  const navigate = useNavigate();
+  const handleListItemClick = (cityEngName) => {
+    navigate(`/matching-step3/${cityEngName}`);
+  };
   return (
     <Box sx={{ width: '70%', display: 'flex', flexDirection: 'column', gap: 1 }}>
       <Stack direction="row" className="items-center justify-between">
@@ -65,7 +96,18 @@ const ListSection = ({ postInfo }) => {
         </ListItem>
         {paginatedPosts.map((post) => (
           <React.Fragment key={post.id}>
-            <ListItem>
+            <ListItem
+              button
+              onClick={() => {
+                const engName = regionNameK2E[post.region];
+                handleListItemClick(engName);
+              }}
+              sx={{
+                '&:hover': {
+                  backgroundColor: '#F9E08880', // Change this to the color you want on hover
+                },
+              }}
+            >
               <ListItemText
                 sx={{ width: '20%' }}
                 primary={
